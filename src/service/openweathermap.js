@@ -4,7 +4,7 @@ const api = axios.create({
     baseURL: 'https://api.openweathermap.org/',
     timeout: 10000,
     params: {
-        appid: process.env.VUE_APP_OPENWEATHERMAP_KEY
+        appid: process.env['VUE_APP_OPENWEATHERMAP_KEY']
     }
 });
 
