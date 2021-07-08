@@ -8,25 +8,19 @@ const api = axios.create({
     }
 });
 
-const unit = "metric";
-
 export default {
     getCurrentWeatherByCityname: (cityname) => {
-        return api.get("/data/2.5/weather", { params: { q: cityname, units: unit }})
+        return api.get("/data/2.5/weather", { params: { q: cityname, units: "metric", lang: "fr" }})
             .then(payload => {
                 let data = payload.data;
                 return {
-                    name: data.name,
-                    description: data.weather[0].main,
+                    ville: data.name,
+                    description: data.weather[0].description,
                     icon_id: data.weather[0].icon,
                     wind_speed: data.wind.speed,
                     humidity: data.main.humidity,
                     pressure: data.main.pressure,
-                    temperature: {
-                        current: data.main.temp,
-                        min: data.main.temp_min,
-                        max: data.main.temp_max
-                    }
+                    temperature: data.main.temp
                 }
             })
             .catch(err => {
